@@ -43,8 +43,9 @@ public class enemyControl : MonoBehaviour
     {
         if (other.tag == "player_bullet")
         {
-            hp--;
+            hp += -playerValues.playerBulletDMG;
             Debug.Log("knya");
+            Debug.Log(hp);
         }
     }
 

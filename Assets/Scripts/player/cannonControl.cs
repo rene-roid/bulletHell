@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class cannonControl : MonoBehaviour
 {
-    public float fireRate = 0.1f;
+    private float fireRate;
+    public static float fireRateShip;
     private float timepassed;
     public GameObject bullet;
 
@@ -14,24 +15,31 @@ public class cannonControl : MonoBehaviour
     void Start()
     {
         timepassed = Time.time;
+        fireRate = fireRateShip;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Update ship firerate
+        fireRate = fireRateShip;
+
+        // Firerate shoot
         if (Input.GetKey(KeyCode.Space) && Time.time > timepassed)
         {
-            fireEffect.GetComponent<Animator>().Play("fireBulletEffect");
             GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
             timepassed = Time.time + fireRate;
         }
 
-        //if (!fireEffect.GetComponent<Animator.Contr)
-        //{
-        //    fireEffect.SetActive(false);
-        //} else
-        //{
-        //    fireEffect.SetActive(true);
-        //}
+
+        // Fire effect when shooting
+        if (timepassed - fireRate + 0.05f > Time.time)
+        {
+            fireEffect.SetActive(true);
+        } else
+        {
+            fireEffect.SetActive(false);
+        }
+
     }
 }

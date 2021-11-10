@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084080bd03262d3448483b61cd0c6611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.2
+  fireRate: 2
   enemyBullet: {fileID: 2919666426876896495, guid: d14ffff6f47cd604aba8683d35736f60, type: 3}
 --- !u!1 &5770804042279792025
 GameObject:
@@ -237,5 +237,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084080bd03262d3448483b61cd0c6611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.2
+  fireRate: 2
   enemyBullet: {fileID: 2919666426876896495, guid: d14ffff6f47cd604aba8683d35736f60, type: 3}
