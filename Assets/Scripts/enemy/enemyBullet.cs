@@ -42,7 +42,7 @@ public class enemyBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Playerbullet hits enemy
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.tag == "shield_skill")
         {
             Destroy(gameObject);
         }
