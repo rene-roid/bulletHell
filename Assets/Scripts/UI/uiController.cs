@@ -7,6 +7,7 @@ public class uiController : MonoBehaviour
 {
     public Text hpText;
     public Text switchCD;
+    public Text DMGText; // Temp
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class uiController : MonoBehaviour
     {
         HpUIController();
         SwitchCD();
+        DMGUIController();
     }
 
     private void HpUIController()
@@ -32,4 +34,12 @@ public class uiController : MonoBehaviour
     {
         switchCD.text = "Switch: ";
     }
+
+    private void DMGUIController()
+    {
+        DMGText.text = "Player 1: " + playerValues.player1BulletDMG + '\n' +
+                      "Player 2: " + playerValues.player2BulletDMG + '\n' +
+                      "Player 3: " + playerValues.player3BulletDMG;
+    }
+
 }

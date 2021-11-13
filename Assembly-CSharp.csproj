@@ -58,13 +58,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\enemy\enemyControl.cs" />
     <Compile Include="Assets\Scripts\player\cannonControl.cs" />
+    <Compile Include="Assets\Scripts\UI\uiController.cs" />
     <Compile Include="Assets\Scripts\player\playerControl.cs" />
+    <Compile Include="Assets\Scripts\player\playerSkills.cs" />
+    <Compile Include="Assets\Scripts\player\playerBurst.cs" />
     <Compile Include="Assets\Scripts\player\playerValues.cs" />
     <Compile Include="Assets\Scripts\enemy\enemyCannon.cs" />
     <Compile Include="Assets\Scripts\player\bulletControl.cs" />
     <Compile Include="Assets\Scripts\enemy\enemyBullet.cs" />
-    <Compile Include="Assets\Scripts\UI\uiController.cs" />
-    <Compile Include="Assets\Scripts\player\playerSkills.cs" />
+    <Compile Include="Assets\Scripts\player\ghostBurstControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

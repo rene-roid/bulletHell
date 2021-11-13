@@ -7,8 +7,10 @@ public class enemyControl : MonoBehaviour
     public enum enemyModes { none, straight, animation };
     public enemyModes enemyType = enemyModes.none;
 
-    public int hp = 10;
+    public float hp = 10;
     public int speed = 5;
+
+    public float burstPoints = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class enemyControl : MonoBehaviour
         if (hp <= 0)
         {
             Debug.Log("yamete kudasai");
+            playerBurst.pointsGiven = 3;
+            Destroy(gameObject);
         }
     }
 

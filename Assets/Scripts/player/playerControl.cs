@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class playerControl : MonoBehaviour
 {
+    public float playerSwitchCD;
+
     private float switchCoolDown = 0;
     private int speed;
     public Animator movement_anim;
@@ -30,17 +32,17 @@ public class playerControl : MonoBehaviour
             case 1: // Party member 1 values
                 speed = playerValues.player1Speed;
                 cannonControl.fireRateShip = 0.1f;
-                playerValues.playerBulletDMG = 1;
+                playerValues.playerBulletDMG = playerValues.player1BulletDMG; 
                 break;
             case 2: // Party member 2 values
                 speed = playerValues.player2Speed;
                 cannonControl.fireRateShip = 0.5f;
-                playerValues.playerBulletDMG = 5;
+                playerValues.playerBulletDMG = playerValues.player2BulletDMG; 
                 break;
             case 3: // Party member 3 values
                 cannonControl.fireRateShip = 1f;
                 speed = playerValues.player3Speed;
-                playerValues.playerBulletDMG = 10;
+                playerValues.playerBulletDMG = playerValues.player3BulletDMG; 
                 break;
             default:
                 playerValues.partyMember = 1;
@@ -49,11 +51,12 @@ public class playerControl : MonoBehaviour
 
         movement();
         anim_mov();
+        teamHPControl();
     }
     private void movement()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime * Input.GetAxis("Horizontal"));
-        transform.Translate(Vector2.up * speed * Time.deltaTime * Input.GetAxis("Vertical"));
+        transform.Translate(Vector2.right * speed * Time.unscaledDeltaTime * Input.GetAxis("Horizontal"));
+        transform.Translate(Vector2.up * speed * Time.unscaledDeltaTime * Input.GetAxis("Vertical"));
 
         if (transform.position.y > 2.5f)
         {
@@ -110,15 +113,22 @@ public class playerControl : MonoBehaviour
         // switching player to a different character with cooldown
         if (Input.GetKeyDown(KeyCode.Alpha1) && switchCoolDown <= Time.time && playerValues.partyMember != 1)
         {
-            playerValues.partyMember = 1; switchCoolDown = 5 + Time.time; movement_anim.SetInteger("partyShip", 1);
+            playerValues.partyMember = 1; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && switchCoolDown <= Time.time && playerValues.partyMember != 2)
         {
-            playerValues.partyMember = 2; switchCoolDown = 5 + Time.time; movement_anim.SetInteger("partyShip", 2);
+            playerValues.partyMember = 2; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && switchCoolDown <= Time.time && playerValues.partyMember != 3)
         {
-            playerValues.partyMember = 3; switchCoolDown = 5 + Time.time; movement_anim.SetInteger("partyShip", 3);
+            playerValues.partyMember = 3; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 3);
         }
+    }
+
+    private void teamHPControl()
+    {
+        if (playerValues.playerHP1 > playerValues.playerMAXHP1) { playerValues.playerHP1 = playerValues.playerMAXHP1; }
+        if (playerValues.playerHP2 > playerValues.playerMAXHP2) { playerValues.playerHP2 = playerValues.playerMAXHP2; }
+        if (playerValues.playerHP3 > playerValues.playerMAXHP3) { playerValues.playerHP3 = playerValues.playerMAXHP3; }
     }
 }
