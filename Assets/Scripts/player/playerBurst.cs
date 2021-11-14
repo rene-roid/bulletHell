@@ -11,24 +11,35 @@ public class playerBurst : MonoBehaviour
     // GhostBurst
     public GameObject ghost;
 
+    // SlowmotionBurst
+    private bool isTimeStop = false;
+    public float timeStopDuration;
+    private float timeStopTime;
+
     private void Start()
     {
         plyr1Burst = 0;
         plyr2Burst = 0;
         plyr3Burst = 0;
+
+        timeStopTime = 0;
     }
 
     private void Update()
     {
         burstController();
 
-        if (plyr1Burst == 60)
+        if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 1 && plyr1Burst == 60)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                ghost.SetActive(true);
-            }
+            ghostBurst();
+            plyr1Burst = 0;
+        } else if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 2 && plyr2Burst == 60 && !isTimeStop)
+        {
+            TimeStop();
+            plyr2Burst = 0;
         }
+
+        TurnOffTimeStop();
     }
 
     private void burstController()
@@ -61,11 +72,24 @@ public class playerBurst : MonoBehaviour
 
     }
 
-    private void ghostBurst()
+    private void ghostBurst() // Need to add timed ghost
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        ghost.SetActive(true);
+    }
+
+    private void TimeStop()
+    {
+        isTimeStop = true;
+        timeStopTime = Time.unscaledTime + timeStopDuration;
+        Time.timeScale = 0f;
+    }
+
+    private void TurnOffTimeStop()
+    {
+        if (Time.unscaledTime > timeStopTime && isTimeStop)
         {
-            ghost.SetActive(true);
+            Time.timeScale = 1f;
+            isTimeStop = false;
         }
     }
 }

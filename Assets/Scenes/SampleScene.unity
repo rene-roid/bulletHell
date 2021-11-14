@@ -10960,6 +10960,7 @@ MonoBehaviour:
   plyr2Burst: 0
   plyr3Burst: 0
   ghost: {fileID: 189132428}
+  timeStopDuration: 5
 --- !u!1 &1656961627
 GameObject:
   m_ObjectHideFlags: 0
