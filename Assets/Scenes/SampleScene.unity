@@ -205,7 +205,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189132428}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -907,6 +907,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 499910889713175829, guid: 9da59bdaf8ff0394aac12295b181a557, type: 3}
   fireEffect: {fileID: 1329439987}
+  amo1: 0
+  amo2: 0
+  amo3: 0
 --- !u!1 &910056609
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,6 +5759,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 499910889713175829, guid: 9da59bdaf8ff0394aac12295b181a557, type: 3}
   fireEffect: {fileID: 1656961627}
+  amo1: 0
+  amo2: 0
+  amo3: 0
 --- !u!1 &1071833579
 GameObject:
   m_ObjectHideFlags: 0
@@ -10953,6 +10959,7 @@ MonoBehaviour:
   plyr1Burst: 0
   plyr2Burst: 0
   plyr3Burst: 0
+  ghost: {fileID: 189132428}
 --- !u!1 &1656961627
 GameObject:
   m_ObjectHideFlags: 0
@@ -11200,7 +11207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1924836187
 RectTransform:
   m_ObjectHideFlags: 0
