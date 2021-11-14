@@ -62,6 +62,7 @@ public class cannonControl : MonoBehaviour
         }
 
         StartCoroutine(Reloading());
+        StartCoroutine(autoReload());
 
         // Fire effect when shooting
         if (timepassed - fireRate + 0.05f > Time.time)
@@ -103,5 +104,30 @@ public class cannonControl : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    IEnumerator autoReload()
+    {
+        if (playerValues.partyMember == 1 && amo1 == 0)
+        {
+            isReloading1 = true;
+            yield return new WaitForSeconds(2);
+            amo1 = playerValues.maxAmmo1;
+            yield return isReloading1 = false;
+        }
+        else if (playerValues.partyMember == 2 && amo2 == 0)
+        {
+            isReloading2 = true;
+            yield return new WaitForSeconds(2);
+            amo2 = playerValues.maxAmmo2;
+            yield return isReloading2 = false;
+        }
+        else if (playerValues.partyMember == 3 && amo3 == 0)
+        {
+            isReloading3 = true;
+            yield return new WaitForSeconds(2);
+            amo3 = playerValues.maxAmmo3;
+            yield return isReloading3 = false;
+        }
     }
 }
