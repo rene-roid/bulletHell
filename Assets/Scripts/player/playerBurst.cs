@@ -12,7 +12,7 @@ public class playerBurst : MonoBehaviour
     public GameObject ghost;
 
     // SlowmotionBurst
-    private bool isTimeStop = false;
+    public static bool isTimeStop = false;
     public float timeStopDuration;
     private float timeStopTime;
 
@@ -81,14 +81,14 @@ public class playerBurst : MonoBehaviour
     {
         isTimeStop = true;
         timeStopTime = Time.unscaledTime + timeStopDuration;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0;
     }
 
     private void TurnOffTimeStop()
     {
         if (Time.unscaledTime > timeStopTime && isTimeStop)
         {
-            Time.timeScale = 1f;
+            //Time.timeScale = 1f;
             isTimeStop = false;
         }
     }

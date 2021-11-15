@@ -16,9 +16,11 @@ public class bulletControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.Translate(transform.up * bulletSpeed * Time.deltaTime);
-        Destroy(gameObject, 1);
+        if (!playerBurst.isTimeStop)
+        {
+            transform.Translate(transform.up * bulletSpeed * Time.deltaTime);
+            Destroy(gameObject, 1);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

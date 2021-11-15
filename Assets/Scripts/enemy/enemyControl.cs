@@ -21,25 +21,29 @@ public class enemyControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(enemyType)
+        if (!playerBurst.isTimeStop)
         {
-            case enemyModes.none:
-                break;            
-            case enemyModes.animation:
-                break;
-            case enemyModes.straight:
-                straightEnemy();
-                break;
-            default:
-                enemyType = enemyModes.none;
-                break;
-        }
+            switch (enemyType)
+            {
+                case enemyModes.none:
+                    break;            
+                case enemyModes.animation:
+                    break;
+                case enemyModes.straight:
+                    straightEnemy();
+                    break;
+                default:
+                    enemyType = enemyModes.none;
+                    break;
+            }
 
-        if (hp <= 0)
-        {
-            Debug.Log("yamete kudasai");
-            playerBurst.pointsGiven = 3;
-            Destroy(gameObject);
+            if (hp <= 0)
+            {
+                Debug.Log("yamete kudasai");
+                playerBurst.pointsGiven = 3;
+                Destroy(gameObject);
+            }
+
         }
     }
 

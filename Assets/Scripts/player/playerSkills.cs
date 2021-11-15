@@ -74,6 +74,7 @@ public class playerSkills : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= nextHeal)
         {
+            GetComponent<ShipGlowController>().Heal();
             playerValues.playerHP1 += (playerValues.playerMAXHP1 * healPercentage);
             playerValues.playerHP2 += (playerValues.playerMAXHP2 * healPercentage);
             playerValues.playerHP3 += (playerValues.playerMAXHP3 * healPercentage);

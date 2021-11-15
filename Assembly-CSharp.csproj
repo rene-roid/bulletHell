@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\enemy\enemyControl.cs" />
     <Compile Include="Assets\Scripts\player\cannonControl.cs" />
+    <Compile Include="Assets\Scripts\player\ghostBurstControl.cs" />
     <Compile Include="Assets\Scripts\UI\uiController.cs" />
     <Compile Include="Assets\Scripts\player\playerControl.cs" />
     <Compile Include="Assets\Scripts\player\playerSkills.cs" />
@@ -66,7 +67,11 @@
     <Compile Include="Assets\Scripts\enemy\enemyCannon.cs" />
     <Compile Include="Assets\Scripts\player\bulletControl.cs" />
     <Compile Include="Assets\Scripts\enemy\enemyBullet.cs" />
-    <Compile Include="Assets\Scripts\player\ghostBurstControl.cs" />
+    <Compile Include="Assets\Scripts\WaveManager.cs" />
+    <Compile Include="Assets\Scripts\ShipGlowController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\LinearOffset.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -21,22 +21,25 @@ public class enemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // bullet type switch
-        switch (bulletType)
+        if (!playerBurst.isTimeStop)
         {
-            case bulletMode.normal:
-                transform.Translate((transform.up * bulletSpeed * Time.deltaTime) * -1f);
-                break;
-            case bulletMode.spiral:
-                spiralBullet();
-                break;
-            default:
-                transform.Translate((transform.up * bulletSpeed * Time.deltaTime) * -1f);
-                break;
-        }
+            // bullet type switch
+            switch (bulletType)
+            {
+                case bulletMode.normal:
+                    transform.position += transform.up * bulletSpeed * Time.deltaTime;
+                    break;
+                case bulletMode.spiral:
+                    spiralBullet();
+                    break;
+                default:
+                    bulletType = bulletMode.normal;
+                    break;
+            }
         
-        Destroy(gameObject, 3);
+            Destroy(gameObject, 3);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

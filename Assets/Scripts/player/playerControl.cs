@@ -55,8 +55,9 @@ public class playerControl : MonoBehaviour
     }
     private void movement()
     {
-        transform.Translate(Vector2.right * speed * Time.unscaledDeltaTime * Input.GetAxis("Horizontal"));
-        transform.Translate(Vector2.up * speed * Time.unscaledDeltaTime * Input.GetAxis("Vertical"));
+        // transform.position = new Vector2(transform.position.x + speed * Time.unscaledDeltaTime * Input.GetAxis("Horizontal"), transform.position.y + speed * Time.unscaledDeltaTime * Input.GetAxis("Vertical"));
+        transform.Translate(Vector2.right * speed * Input.GetAxis("Horizontal") * Time.unscaledDeltaTime);
+        transform.Translate(Vector2.up * speed * Input.GetAxis("Vertical") * Time.unscaledDeltaTime);
 
         if (transform.position.y > 2.5f)
         {
@@ -67,13 +68,13 @@ public class playerControl : MonoBehaviour
             transform.position = new Vector2(transform.position.x, -4.5f);
         }
 
-        if (transform.position.x < -8.4f)
+        if (transform.position.x < -6f)
         {
-            transform.position = new Vector2(-8.4f, transform.position.y);
+            transform.position = new Vector2(-6f, transform.position.y);
         }
-        else if (transform.position.x > 8.4f)
+        else if (transform.position.x > 6f)
         {
-            transform.position = new Vector2(8.4f, transform.position.y);
+            transform.position = new Vector2(6f, transform.position.y);
         }
     }
 
@@ -113,14 +114,17 @@ public class playerControl : MonoBehaviour
         // switching player to a different character with cooldown
         if (Input.GetKeyDown(KeyCode.Alpha1) && switchCoolDown <= Time.time && playerValues.partyMember != 1)
         {
+            GetComponent<ShipGlowController>().Glow();
             playerValues.partyMember = 1; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && switchCoolDown <= Time.time && playerValues.partyMember != 2)
         {
+            GetComponent<ShipGlowController>().Glow();
             playerValues.partyMember = 2; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && switchCoolDown <= Time.time && playerValues.partyMember != 3)
         {
+            GetComponent<ShipGlowController>().Glow();
             playerValues.partyMember = 3; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 3);
         }
     }
@@ -131,4 +135,5 @@ public class playerControl : MonoBehaviour
         if (playerValues.playerHP2 > playerValues.playerMAXHP2) { playerValues.playerHP2 = playerValues.playerMAXHP2; }
         if (playerValues.playerHP3 > playerValues.playerMAXHP3) { playerValues.playerHP3 = playerValues.playerMAXHP3; }
     }
+
 }
