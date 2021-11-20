@@ -18,6 +18,9 @@ public class playerControl : MonoBehaviour
 
         // Setting up cooldown
         switchCoolDown = 0;
+
+        // Steve
+        playerValues.partyMember = 1; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 3);
     }
 
     // Update is called once per frame
@@ -56,8 +59,8 @@ public class playerControl : MonoBehaviour
     private void movement()
     {
         // transform.position = new Vector2(transform.position.x + speed * Time.unscaledDeltaTime * Input.GetAxis("Horizontal"), transform.position.y + speed * Time.unscaledDeltaTime * Input.GetAxis("Vertical"));
-        transform.Translate(Vector2.right * speed * Input.GetAxis("Horizontal") * Time.unscaledDeltaTime);
-        transform.Translate(Vector2.up * speed * Input.GetAxis("Vertical") * Time.unscaledDeltaTime);
+        transform.Translate(Vector2.right * speed * Input.GetAxisRaw("Horizontal") * Time.unscaledDeltaTime);
+        transform.Translate(Vector2.up * speed * Input.GetAxisRaw("Vertical") * Time.unscaledDeltaTime);
 
         if (transform.position.y > 2.5f)
         {
@@ -115,7 +118,7 @@ public class playerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && switchCoolDown <= Time.time && playerValues.partyMember != 1)
         {
             GetComponent<ShipGlowController>().Glow();
-            playerValues.partyMember = 1; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 1);
+            playerValues.partyMember = 1; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 3);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && switchCoolDown <= Time.time && playerValues.partyMember != 2)
         {
@@ -125,7 +128,7 @@ public class playerControl : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3) && switchCoolDown <= Time.time && playerValues.partyMember != 3)
         {
             GetComponent<ShipGlowController>().Glow();
-            playerValues.partyMember = 3; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 3);
+            playerValues.partyMember = 3; switchCoolDown = playerSwitchCD + Time.time; movement_anim.SetInteger("partyShip", 1);
         }
     }
 

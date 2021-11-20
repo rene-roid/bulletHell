@@ -39,24 +39,24 @@ public class cannonControl : MonoBehaviour
         fireRate = fireRateShip;
 
         // Firerate shoot
-        if (Input.GetKey(KeyCode.Space) && Time.time > timepassed)
+        if (Input.GetKey(KeyCode.Space) && Time.unscaledTime > timepassed)
         {
             if (playerValues.partyMember == 1 && amo1 > 0 && !isReloading1)
             {
                 GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
-                timepassed = Time.time + fireRate;
+                timepassed = Time.unscaledTime + fireRate;
                 amo1--;
             }
             else if (playerValues.partyMember == 2 && amo2 > 0 && !isReloading2)
             {
                 GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
-                timepassed = Time.time + fireRate;
+                timepassed = Time.unscaledTime + fireRate;
                 amo2--;
             }
             else if (playerValues.partyMember == 3 && amo3 > 0 && !isReloading3)
             {
                 GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
-                timepassed = Time.time + fireRate;
+                timepassed = Time.unscaledTime + fireRate;
                 amo3--;
             }
         }
@@ -65,7 +65,7 @@ public class cannonControl : MonoBehaviour
         StartCoroutine(autoReload());
 
         // Fire effect when shooting
-        if (timepassed - fireRate + 0.05f > Time.time)
+        if (timepassed - fireRate + 0.05f > Time.unscaledTime)
         {
             fireEffect.SetActive(true);
         } else

@@ -27,6 +27,10 @@ public class playerBurst : MonoBehaviour
 
     private void Update()
     {
+        playerValues.plyrBurst1 = plyr1Burst;
+        playerValues.plyrBurst2 = plyr2Burst;
+        playerValues.plyrBurst3 = plyr3Burst;
+
         burstController();
 
         if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 1 && plyr1Burst == 60)
@@ -81,14 +85,14 @@ public class playerBurst : MonoBehaviour
     {
         isTimeStop = true;
         timeStopTime = Time.unscaledTime + timeStopDuration;
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
     }
 
     private void TurnOffTimeStop()
     {
         if (Time.unscaledTime > timeStopTime && isTimeStop)
         {
-            //Time.timeScale = 1f;
+            Time.timeScale = 1f;
             isTimeStop = false;
         }
     }
