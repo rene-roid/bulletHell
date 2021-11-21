@@ -41,6 +41,10 @@ public class playerBurst : MonoBehaviour
         {
             TimeStop();
             plyr2Burst = 0;
+        } else if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 3 && plyr3Burst == 60)
+        {
+            ScreenNuke();
+            plyr3Burst = 0;
         }
 
         TurnOffTimeStop();
@@ -94,6 +98,15 @@ public class playerBurst : MonoBehaviour
         {
             Time.timeScale = 1f;
             isTimeStop = false;
+        }
+    }
+
+    private void ScreenNuke()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
         }
     }
 }

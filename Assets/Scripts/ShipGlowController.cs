@@ -17,7 +17,7 @@ public class ShipGlowController : MonoBehaviour
     {
         if (time > 0)
         {
-            time = Mathf.Clamp01(time - Time.deltaTime * 2);
+            time = Mathf.Clamp01(time - Time.unscaledDeltaTime * 2);
             mat.SetFloat("_LerpVal", 1 - time);
         }
     }

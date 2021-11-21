@@ -16,6 +16,10 @@ public class cannonControl : MonoBehaviour
     public int amo2;
     public int amo3;
 
+    public static int Pamo1;
+    public static int Pamo2;
+    public static int Pamo3;
+
     // Reloading values
     private bool isReloading1 = false;
     private bool isReloading2 = false;
@@ -73,6 +77,10 @@ public class cannonControl : MonoBehaviour
             fireEffect.SetActive(false);
         }
 
+        Pamo1 = amo1;
+        Pamo2 = amo2;
+        Pamo3 = amo3;
+
     }
 
     IEnumerator Reloading()
@@ -108,26 +116,26 @@ public class cannonControl : MonoBehaviour
 
     IEnumerator autoReload()
     {
-        if (playerValues.partyMember == 1 && amo1 == 0)
+        if (playerValues.partyMember == 1 && amo1 == 0 && !isReloading1)
         {
             isReloading1 = true;
             yield return new WaitForSeconds(2);
+            isReloading1 = false;
             amo1 = playerValues.maxAmmo1;
-            yield return isReloading1 = false;
         }
-        else if (playerValues.partyMember == 2 && amo2 == 0)
+        else if (playerValues.partyMember == 2 && amo2 == 0 && !isReloading2)
         {
             isReloading2 = true;
             yield return new WaitForSeconds(2);
+            isReloading2 = false;
             amo2 = playerValues.maxAmmo2;
-            yield return isReloading2 = false;
         }
-        else if (playerValues.partyMember == 3 && amo3 == 0)
+        else if (playerValues.partyMember == 3 && amo3 == 0 && !isReloading3)
         {
             isReloading3 = true;
             yield return new WaitForSeconds(2);
+            isReloading3 = false;
             amo3 = playerValues.maxAmmo3;
-            yield return isReloading3 = false;
         }
     }
 }

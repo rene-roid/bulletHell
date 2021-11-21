@@ -5,7 +5,8 @@ using UnityEngine;
 public class BackgroundMovement : MonoBehaviour
 {
     public float moveSpeed = 2f;
-    public float mapSize = 55f;
+    public float mapSizeY = 0;
+    public float mapSizeX = 0;
 
     private float currentY, currentX;
     // Start is called before the first frame update
@@ -18,13 +19,26 @@ public class BackgroundMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentY -= moveSpeed * Time.deltaTime;
-
-        if (currentY < -mapSize)
+        if (mapSizeY != 0)
         {
-            currentY += mapSize;
+            currentY -= moveSpeed * Time.deltaTime;
+
+            if (currentY < -mapSizeY)
+            {
+                currentY += mapSizeY;
+            }
         }
 
-        transform.position = new Vector2(currentX, currentY);
+        if (mapSizeX != 0)
+        {
+            currentX -= moveSpeed * Time.deltaTime;
+
+            if (currentX < -mapSizeX)
+            {
+                currentX += mapSizeX;
+            }
+        }
+
+        transform.position = new Vector3(currentX, currentY, transform.position.z) ;
     }
 }

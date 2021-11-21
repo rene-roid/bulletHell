@@ -12,25 +12,25 @@ public class playerValues
     // Player 1
     public static float playerHP1 = 100;
     public static float playerMAXHP1 = 100;
-    public static int player1Speed = 5;
+    public static int player1Speed = 3;
     public static float player1BulletDMG = 1;
     public static int maxAmmo1 = 50;
     public static float plyrBurst1 = 0;
 
     // Player 2
-    public static float playerHP2 = 50;
-    public static float playerMAXHP2 = 50;
-    public static int player2Speed = 10;
-    public static float player2BulletDMG = 5;
-    public static int maxAmmo2 = 10;
+    public static float playerHP2 = 75;
+    public static float playerMAXHP2 = 75;
+    public static int player2Speed = 5;
+    public static float player2BulletDMG = 1.5f;
+    public static int maxAmmo2 = 45;
     public static float plyrBurst2 = 0;
 
     // Player 3
-    public static float playerHP3 = 30;
-    public static float playerMAXHP3 = 30;
-    public static int player3Speed = 20;
-    public static float player3BulletDMG = 10;
-    public static int maxAmmo3 = 5;
+    public static float playerHP3 = 45;
+    public static float playerMAXHP3 = 45;
+    public static int player3Speed = 8;
+    public static float player3BulletDMG = 3;
+    public static int maxAmmo3 = 30;
     public static float plyrBurst3 = 0;
 
 

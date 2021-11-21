@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerSkills : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class playerSkills : MonoBehaviour
     private float nextBuff;
     private float bulletDamage1, bulletDamage2, bulletDamage3;
 
+    // CooldownOverlay
+    public Text overlay;
+
     private void Awake()
     {
         bulletDamage1 = playerValues.player1BulletDMG;
@@ -54,6 +58,8 @@ public class playerSkills : MonoBehaviour
             default:
                 break;
         }
+
+        CheckPlayer();
         CheckTruco();
     }
 
@@ -66,6 +72,7 @@ public class playerSkills : MonoBehaviour
 
             shieldTime = Time.time + ShieldSkillDuration; // Calculating duration of shield
             nextShield = Time.time + ShieldSkillDuration + ShieldSkillCooldown; // Calculating next shield
+
             yield return null;
         }
     }
@@ -75,9 +82,10 @@ public class playerSkills : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= nextHeal)
         {
             GetComponent<ShipGlowController>().Heal();
-            playerValues.playerHP1 += (playerValues.playerMAXHP1 * healPercentage);
-            playerValues.playerHP2 += (playerValues.playerMAXHP2 * healPercentage);
-            playerValues.playerHP3 += (playerValues.playerMAXHP3 * healPercentage);
+            if (playerValues.playerHP1 > 0) { playerValues.playerHP1 += (playerValues.playerMAXHP1 * healPercentage); }
+            if (playerValues.playerHP2 > 0) { playerValues.playerHP2 += (playerValues.playerMAXHP2 * healPercentage); }
+            if (playerValues.playerHP3 > 0) { playerValues.playerHP3 += (playerValues.playerMAXHP3 * healPercentage); }
+
             nextHeal = Time.time + healSkillCooldown;
             yield return null;
         }
@@ -111,6 +119,35 @@ public class playerSkills : MonoBehaviour
             playerValues.player1BulletDMG = bulletDamage1;
             playerValues.player2BulletDMG = bulletDamage2;
             playerValues.player3BulletDMG = bulletDamage3;
+        }
+    }
+
+    private void OverlayCD(float _cooldown)
+    {
+        float _time;
+        if (_cooldown <= 0)
+        {
+            overlay.text = " ";
+        } else
+        {
+            _time = _cooldown - 1 * Time.time;
+            overlay.text = _time.ToString();
+        }
+    }
+
+    private void CheckPlayer()
+    {
+        if (playerValues.partyMember == 1)
+        {
+            OverlayCD(ShieldSkillCooldown);
+        }
+        else if (playerValues.partyMember == 2)
+        {
+            OverlayCD(buffSkillCooldown);
+        }
+        else if (playerValues.partyMember == 3)
+        {
+            OverlayCD(healSkillCooldown);
         }
     }
 }

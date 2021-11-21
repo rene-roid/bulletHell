@@ -33,7 +33,7 @@ public class ghostBurstControl : MonoBehaviour
 
         if (playerValues.partyMember == 1)
         {
-            movement_anim.SetInteger("partyShip", 1);
+            movement_anim.SetInteger("partyShip", 3);
         }
         else if (playerValues.partyMember == 2)
         {
@@ -41,7 +41,7 @@ public class ghostBurstControl : MonoBehaviour
         }
         else if (playerValues.partyMember == 3)
         {
-            movement_anim.SetInteger("partyShip", 3);
+            movement_anim.SetInteger("partyShip", 1);
         }
     }
 }
