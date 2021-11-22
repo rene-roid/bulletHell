@@ -10,6 +10,7 @@ public class cannonControl : MonoBehaviour
     public GameObject bullet;
 
     public GameObject fireEffect;
+    public LineRenderer lineRenderer;
 
     // Ammo values
     public int amo1;
@@ -53,7 +54,8 @@ public class cannonControl : MonoBehaviour
             }
             else if (playerValues.partyMember == 2 && amo2 > 0 && !isReloading2)
             {
-                GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
+                StartCoroutine(RayCast());
+                //GameObject bulletCopy = Instantiate(bullet, transform.position, Quaternion.identity);
                 timepassed = Time.unscaledTime + fireRate;
                 amo2--;
             }
@@ -137,5 +139,35 @@ public class cannonControl : MonoBehaviour
             isReloading3 = false;
             amo3 = playerValues.maxAmmo3;
         }
+    }
+
+    IEnumerator RayCast()
+    {
+        RaycastHit2D hitinfo = Physics2D.Raycast(transform.position, transform.up * 100);
+        
+        if (hitinfo)
+        {
+            enemyControl newHit = hitinfo.transform.GetComponent<enemyControl>();
+            if (newHit != null)
+            {
+                print("bumshakalaka");
+                newHit.hp -= playerValues.player2BulletDMG;
+            }
+
+            if (hitinfo.collider.tag != "enemy_bullet" && hitinfo.collider.tag != "shield_skill")
+            {
+                lineRenderer.SetPosition(0, this.transform.position);
+                lineRenderer.SetPosition(1, hitinfo.point);
+            }
+        }
+        else
+        {
+            lineRenderer.SetPosition(0, this.transform.position);
+            lineRenderer.SetPosition(1, transform.position + transform.up * 100);
+        }
+
+        lineRenderer.enabled = true;
+        yield return new WaitForSeconds(0.02f);
+        lineRenderer.enabled = false;
     }
 }
