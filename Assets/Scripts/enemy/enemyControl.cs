@@ -20,6 +20,7 @@ public class enemyControl : MonoBehaviour
 
 
     public GameObject deathExplosion;
+    private Rigidbody2D rg;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class enemyControl : MonoBehaviour
         if (player)
         {
             target = player.transform;
+            rg = GetComponent<Rigidbody2D>();
         }
     }
 
@@ -102,11 +104,13 @@ public class enemyControl : MonoBehaviour
         {
             // Getting distance between asteroid and player
             Vector2 direction = target.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+            rg.rotation = angle;
             direction.Normalize();
             movement = direction;
         }
 
-        // Moving asteroid
+        // Moving ship
         transform.position = (Vector2)transform.position + (movement * speed * Time.deltaTime);
     }
 }

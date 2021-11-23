@@ -25,6 +25,7 @@ public class playerSkills : MonoBehaviour
     [Range(0.0f, 1.0f)] public float buffPercentage;
     public float BuffSkillDuration;
     public float buffSkillCooldown;
+    public GameObject buffParticle;
 
     // Private vars team buff
     private float buffTime;
@@ -101,6 +102,8 @@ public class playerSkills : MonoBehaviour
 
             buffTime = Time.time + BuffSkillDuration;
             nextBuff = Time.time + BuffSkillDuration + buffSkillCooldown;
+
+            buffParticle.SetActive(true);
             yield return null;
         }
     }
@@ -119,19 +122,18 @@ public class playerSkills : MonoBehaviour
             playerValues.player1BulletDMG = bulletDamage1;
             playerValues.player2BulletDMG = bulletDamage2;
             playerValues.player3BulletDMG = bulletDamage3;
+            buffParticle.SetActive(false);
         }
     }
 
     private void OverlayCD(float _cooldown)
     {
-        float _time;
         if (_cooldown <= 0)
         {
             overlay.text = " ";
         } else
         {
-            _time = _cooldown - 1 * Time.time;
-            overlay.text = _time.ToString();
+            overlay.text = Mathf.RoundToInt(_cooldown).ToString();
         }
     }
 
@@ -139,15 +141,15 @@ public class playerSkills : MonoBehaviour
     {
         if (playerValues.partyMember == 1)
         {
-            OverlayCD(ShieldSkillCooldown);
+            OverlayCD(nextShield - Time.time);
         }
         else if (playerValues.partyMember == 2)
         {
-            OverlayCD(buffSkillCooldown);
+            OverlayCD(nextBuff - Time.time);
         }
         else if (playerValues.partyMember == 3)
         {
-            OverlayCD(healSkillCooldown);
+            OverlayCD(nextHeal - Time.time);
         }
     }
 }

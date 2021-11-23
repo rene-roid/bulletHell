@@ -29,16 +29,15 @@ public class PlayerUI : MonoBehaviour
     public Image lifeBar2, lifeBar3;
     public Image burstBar2, burstBar3;
 
+    // Skills
+    public Sprite[] skillsIcons;
+    public Image skillRenderer;
+    public Image burstRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        BottomUI();
     }
 
     private void FixedUpdate()
@@ -70,14 +69,25 @@ public class PlayerUI : MonoBehaviour
         {
             float finalLife = playerValues.playerHP1 / totalLife;
             lifeBar.fillAmount = Mathf.MoveTowards(lifeBar.fillAmount, finalLife, 0.6f * Time.deltaTime);
+
+            // Side characters hp
+            SideCharacterStats(playerValues.playerHP2, playerValues.playerMAXHP2, playerName[1], playerValues.playerHP3, playerValues.playerMAXHP3, playerName[2], playerValues.plyrBurst2, playerValues.plyrBurst3);
+
         } else if (playerValues.partyMember == 2)
         {
             float finalLife = playerValues.playerHP2 / totalLife;
             lifeBar.fillAmount = Mathf.MoveTowards(lifeBar.fillAmount, finalLife, 0.6f * Time.deltaTime);
+
+            // Side characters hp
+            SideCharacterStats(playerValues.playerHP1, playerValues.playerMAXHP1, playerName[0], playerValues.playerHP3, playerValues.playerMAXHP3, playerName[2], playerValues.plyrBurst2, playerValues.plyrBurst3);
+
         } else if (playerValues.partyMember == 3)
         {
             float finalLife = playerValues.playerHP3 / totalLife;
             lifeBar.fillAmount = Mathf.MoveTowards(lifeBar.fillAmount, finalLife, 0.6f * Time.deltaTime);
+
+            // Side characters hp
+            SideCharacterStats(playerValues.playerHP1, playerValues.playerMAXHP1, playerName[0], playerValues.playerHP2, playerValues.playerMAXHP2, playerName[1], playerValues.plyrBurst2, playerValues.plyrBurst3);
         }
 
     }
@@ -107,16 +117,23 @@ public class PlayerUI : MonoBehaviour
         {
             renderImage.sprite = character[0];
             playerText.GetComponentInChildren<TextMeshProUGUI>().text = playerName[0];
+
+            // Skill/Burst
+            skillBurstRenderer(skillsIcons[0], skillsIcons[1]);
         }
         else if (playerValues.partyMember == 2)
         {
             renderImage.sprite = character[1];
             playerText.GetComponentInChildren<TextMeshProUGUI>().text = playerName[1];
+
+            skillBurstRenderer(skillsIcons[2], skillsIcons[3]);
         }
         else if (playerValues.partyMember == 3)
         {
             renderImage.sprite = character[2];
             playerText.GetComponentInChildren<TextMeshProUGUI>().text = playerName[2];
+
+            skillBurstRenderer(skillsIcons[4], skillsIcons[5]);
         }
     }
 
@@ -136,42 +153,26 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    private void BottomUI()
+    private void SideCharacterStats(float _side2HP, float side2totalHP, string _side2Name, float _side3HP, float side3totalHP, string _side3Name, float _side2Burst, float _side3Burst)
     {
-        if (playerValues.partyMember == 1)
-        {
-            BottomUIController(playerValues.playerHP2, playerValues.playerHP3, playerValues.playerMAXHP2, playerValues.playerMAXHP3, playerValues.plyrBurst2, playerValues.plyrBurst3, playerName[1], playerName[2]);
-        }
-        else if (playerValues.partyMember == 2)
-        {
-            BottomUIController(playerValues.playerHP1, playerValues.playerHP3, playerValues.playerMAXHP1, playerValues.playerMAXHP3, playerValues.plyrBurst1, playerValues.plyrBurst3, playerName[0], playerName[2]);
-        }
-        else if (playerValues.partyMember == 3)
-        {
-            BottomUIController(playerValues.playerHP1, playerValues.playerHP2, playerValues.playerMAXHP1, playerValues.playerMAXHP2, playerValues.plyrBurst1, playerValues.plyrBurst2, playerName[0], playerName[1]);
-        }
+        float finalLife2 = _side2HP / side2totalHP; // Player hp
+        lifeBar2.fillAmount = Mathf.MoveTowards(lifeBar2.fillAmount, finalLife2, 0.6f * Time.deltaTime);
+        // Player name
+        player2.GetComponentInChildren<TextMeshProUGUI>().text = _side2Name;
+        // Player burst
+        float finalBurst2 = _side2Burst / 60f;
+        burstBar2.fillAmount = Mathf.MoveTowards(burstBar2.fillAmount, finalBurst2, 0.6f * Time.time);
+        
+        float finalLife3 = _side3HP / side3totalHP;
+        lifeBar3.fillAmount = Mathf.MoveTowards(lifeBar3.fillAmount, finalLife3, 0.6f * Time.deltaTime);
+        player3.GetComponentInChildren<TextMeshProUGUI>().text = _side3Name;
+        float finalBurst3 = _side3Burst / 60f;
+        burstBar3.fillAmount = Mathf.MoveTowards(burstBar3.fillAmount, finalBurst3, 0.6f * Time.time);
     }
 
-    private void BottomUIController(float _player2HP, float _player3HP, float _player2maxHP, float _playermax3HP, float _player2Burst, float _player3Burst, string _player2Name, string _player3Name)
+    private void skillBurstRenderer(Sprite _skill, Sprite _burst)
     {
-        // Player 2
-        // HP2
-        float finalLife2 = _player2HP / _player2maxHP;
-        lifeBar2.fillAmount = Mathf.MoveTowards(lifeBar2.fillAmount, finalLife2, 0.6f * Time.deltaTime);
-        // Burst2
-        float actualBurst2 = _player2Burst / maxBurst;
-        burstBar2.fillAmount = Mathf.MoveTowards(burstBar2.fillAmount, actualBurst2, 0.6f * Time.deltaTime);
-        // Name
-        player2.GetComponentInChildren<TextMeshProUGUI>().text = _player2Name;
-
-        // Player 3
-        // HP2
-        float finalLife3 = _player3HP / _playermax3HP;
-        lifeBar2.fillAmount = Mathf.MoveTowards(lifeBar3.fillAmount, finalLife3, 0.6f * Time.deltaTime);
-        // Burst2
-        float actualBurst3 = _player3Burst / maxBurst;
-        burstBar3.fillAmount = Mathf.MoveTowards(burstBar3.fillAmount, actualBurst3, 0.6f * Time.deltaTime);
-        // Name
-        player3.GetComponentInChildren<TextMeshProUGUI>().text = _player3Name;
+        skillRenderer.sprite = _skill;
+        burstRenderer.sprite = _burst;
     }
 }
