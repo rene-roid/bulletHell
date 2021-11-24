@@ -16,6 +16,8 @@ public class playerBurst : MonoBehaviour
     public static bool isTimeStop = false;
     public float timeStopDuration;
     private float timeStopTime;
+    public AudioClip stopSFX;
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -40,6 +42,9 @@ public class playerBurst : MonoBehaviour
             plyr1Burst = 0;
         } else if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 2 && plyr2Burst == 60 && !isTimeStop)
         {
+            audioSource.clip = stopSFX;
+            audioSource.Play();
+
             TimeStop();
             plyr2Burst = 0;
         } else if (Input.GetKeyDown(KeyCode.Q) && playerValues.partyMember == 3 && plyr3Burst == 60)

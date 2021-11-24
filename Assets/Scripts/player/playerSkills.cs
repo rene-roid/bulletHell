@@ -35,6 +35,10 @@ public class playerSkills : MonoBehaviour
     // CooldownOverlay
     public Text overlay;
 
+    // Audio
+    public AudioClip[] audioClips;
+    public AudioSource audioSource;
+
     private void Awake()
     {
         bulletDamage1 = playerValues.player1BulletDMG;
@@ -88,6 +92,10 @@ public class playerSkills : MonoBehaviour
             if (playerValues.playerHP3 > 0) { playerValues.playerHP3 += (playerValues.playerMAXHP3 * healPercentage); }
 
             nextHeal = Time.time + healSkillCooldown;
+
+            audioSource.clip = audioClips[1];
+            audioSource.Play();
+
             yield return null;
         }
     }
@@ -104,6 +112,10 @@ public class playerSkills : MonoBehaviour
             nextBuff = Time.time + BuffSkillDuration + buffSkillCooldown;
 
             buffParticle.SetActive(true);
+
+            audioSource.clip = audioClips[2];
+            audioSource.Play();
+
             yield return null;
         }
     }

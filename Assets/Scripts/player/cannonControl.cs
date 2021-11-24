@@ -150,7 +150,6 @@ public class cannonControl : MonoBehaviour
             enemyControl newHit = hitinfo.transform.GetComponent<enemyControl>();
             if (newHit != null)
             {
-                print("bumshakalaka");
                 newHit.hp -= playerValues.player2BulletDMG;
             }
 
