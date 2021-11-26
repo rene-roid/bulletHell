@@ -24,6 +24,10 @@ public class bossKnife : MonoBehaviour
 
     public int knifeDamage = 2;
 
+    public bool backWardKnife = false;
+
+    public float timeInvo = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,19 +55,29 @@ public class bossKnife : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (amongUsBoss.isAiming)
+        if (amongUsBoss.isAiming && backWardKnife)
         {
-
             if (transform.position.y < limitAnim.y)
             {
                 transform.position = (Vector2)transform.position + (anim * 1 * Time.deltaTime);
             }
             AutoAimBullet();
-        } else
+        } else if (backWardKnife)
         {
             // Moving knife
             transform.position = (Vector2)transform.position + (movement * knifeSpeed * Time.deltaTime);
         }
+
+        if (amongUsBoss.isAiming && !backWardKnife)
+        {
+            AutoAimBullet();
+        }
+        else
+        {
+            // Moving knife
+            transform.position = (Vector2)transform.position + (movement * knifeSpeed * Time.deltaTime);
+        }
+
         Destroy(gameObject, bulletLife);
 
     }

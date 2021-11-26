@@ -15,6 +15,19 @@ public class playerControl : MonoBehaviour
     private bool ded2 = false;
     private bool ded3 = false;
 
+    private void Awake()
+    {
+        playerValues.allDead = false;
+
+        playerValues.playerHP1 = playerValues.playerMAXHP1;
+        playerValues.playerHP2 = playerValues.playerMAXHP2;
+        playerValues.playerHP3 = playerValues.playerMAXHP3;
+
+        playerValues.plyrBurst1 = 0;
+        playerValues.plyrBurst2 = 0;
+        playerValues.plyrBurst3 = 0;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -198,6 +211,7 @@ public class playerControl : MonoBehaviour
 
     private void AllDead()
     {
+        playerValues.allDead = true;
         gameObject.SetActive(false);
         print("haha");
     }

@@ -8,6 +8,7 @@ public class playerValues
     public static int score = 0;
     public static int partyMember = 1;
     public static float playerBulletDMG; // Edited in player control
+    public static bool allDead = false;
 
     // Player 1
     public static float playerHP1 = 100;

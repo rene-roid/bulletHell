@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public GameObject player, pausePanel;
+    public GameObject player, pausePanel, deathPanel;
     private bool isPaused;
 
     private void Awake()
@@ -25,6 +25,15 @@ public class MenuController : MonoBehaviour
     private void Update()
     {
         PauseMenu();
+        DeathScreen();
+    }
+
+    private void DeathScreen()
+    {
+        if (playerValues.allDead)
+        {
+            deathPanel.SetActive(true);
+        }
     }
 
     private void PauseMenu()
@@ -52,6 +61,8 @@ public class MenuController : MonoBehaviour
     public void restart()
     {
         Time.timeScale = 1;
+        playerValues.allDead = false;
+        deathPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
