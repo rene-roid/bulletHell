@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class amongUsBoss : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class amongUsBoss : MonoBehaviour
     public GameObject player;
 
     public GameObject knife;
+    public GameObject knife2;
     public int knifesSpawn = 10;
 
     private Rigidbody2D rb;
@@ -69,6 +71,10 @@ public class amongUsBoss : MonoBehaviour
         {
             StartCoroutine(CannonWave());
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartCoroutine(KnifeThrow());
+        }
 
         Attacks();
 
@@ -79,6 +85,11 @@ public class amongUsBoss : MonoBehaviour
 
         BossHP();
 
+        // Boss die transition
+        if (votes == 5)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
     }
 
@@ -88,7 +99,7 @@ public class amongUsBoss : MonoBehaviour
         {
             if (status == stateBoss.NORMAL)
             {
-                int attack = Random.Range(0, 5);
+                int attack = Random.Range(0, 6);
 
                 switch (attack)
                 {
@@ -111,6 +122,10 @@ public class amongUsBoss : MonoBehaviour
                     case 4:
                         state = stateBoss.ATTACKING;
                         CannonWav();
+                        break;
+                    case 5:
+                        state = stateBoss.ATTACKING;
+                        KnifeThrou();
                         break;
                 }
             }
@@ -138,12 +153,16 @@ public class amongUsBoss : MonoBehaviour
         StartCoroutine(CannonWave());
     }
 
+    private void KnifeThrou()
+    {
+        StartCoroutine(KnifeThrow());
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "player_bullet")
         {
             bossHP -= playerValues.playerBulletDMG;
-            print(bossHP);
         }
     }
 
@@ -242,28 +261,19 @@ public class amongUsBoss : MonoBehaviour
         isAiming = false;
         bossKnife.knifeSpeed = 10;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         state = stateBoss.WAITING;
     }
 
     IEnumerator KnifeInvocation()
     {
-        bossKnife.knifeSpeed = 0;
-        isAiming = true;
-
-        for (int i = 0; i < divisions; i++)
+        for (int i = 0; i < knifes.Length; i++)
         {
-
-            GameObject newKnife = Instantiate(knife, transform.position + new Vector3(Mathf.Sin(((float)i/divisions) * 2 * Mathf.PI), Mathf.Cos(((float)i / divisions) * 2 * Mathf.PI)) * 2, Quaternion.identity);
-            knifes[i] = newKnife;
-
+            GameObject newKnife = Instantiate(knife2, transform.position + new Vector3(Mathf.Sin(((float)i / divisions) * 2 * Mathf.PI), Mathf.Cos(((float)i / divisions) * 2 * Mathf.PI)) * 2, Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
         }
 
-        isAiming = false;
-        bossKnife.knifeSpeed = 10;
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         state = stateBoss.WAITING;
     }
 
@@ -289,6 +299,22 @@ public class amongUsBoss : MonoBehaviour
         AlertWave[12].SetActive(false);
 
         yield return new WaitForSeconds(1f);
+        state = stateBoss.WAITING;
+    }
+
+    IEnumerator KnifeThrow()
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            GameObject newKnife = Instantiate(knife2, new Vector2(Random.Range(-5.3f, 5.3f), Random.Range(2.19f, 3.93f)), Quaternion.identity);
+            newKnife.GetComponent<bossKnife2>().knifeSpeed = 20;
+            newKnife.GetComponent<bossKnife2>().timeC = 1f;
+            newKnife.GetComponent<bossKnife2>().animateKnife = true;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(3f);
         state = stateBoss.WAITING;
     }
 

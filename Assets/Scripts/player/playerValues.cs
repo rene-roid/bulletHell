@@ -34,5 +34,6 @@ public class playerValues
     public static int maxAmmo3 = 30;
     public static float plyrBurst3 = 0;
 
-
+    // Levels unlocked
+    public static int levelsUnlocked = 1;
 }

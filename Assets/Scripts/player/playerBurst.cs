@@ -19,6 +19,10 @@ public class playerBurst : MonoBehaviour
     public AudioClip stopSFX;
     public AudioSource audioSource;
 
+    public PostProcessVolume volume;
+    private LensDistortion _LensDistortion;
+    private ChromaticAberration _ChromaticAberration;
+
     private void Start()
     {
         plyr1Burst = 0;
@@ -26,6 +30,9 @@ public class playerBurst : MonoBehaviour
         plyr3Burst = 0;
 
         timeStopTime = 0;
+
+        volume.profile.TryGetSettings(out _LensDistortion);
+        volume.profile.TryGetSettings(out _ChromaticAberration);
     }
 
     private void Update()
@@ -96,6 +103,18 @@ public class playerBurst : MonoBehaviour
         isTimeStop = true;
         timeStopTime = Time.unscaledTime + timeStopDuration;
         Time.timeScale = 0;
+
+        PostProcessingEffect();
+    }
+
+    private void PostProcessingEffect()
+    {
+        _LensDistortion.enabled.Override(true);
+        _LensDistortion.intensity.Override(-16f);
+
+        _ChromaticAberration.enabled.Override(true);
+        _ChromaticAberration.intensity.Override(1f);
+
     }
 
     private void TurnOffTimeStop()
@@ -104,6 +123,9 @@ public class playerBurst : MonoBehaviour
         {
             Time.timeScale = 1f;
             isTimeStop = false;
+
+            _LensDistortion.intensity.Override(0f);
+            _ChromaticAberration.intensity.Override(0f);
         }
     }
 

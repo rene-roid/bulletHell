@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public enum spawnState { SPAWNING, WAITING, COUNTING };
+    public enum spawnState { SPAWNING, WAITING, COUNTING, WAVESPAWNED };
 
     [System.Serializable]
     public class Wave
@@ -28,6 +28,13 @@ public class WaveManager : MonoBehaviour
 
     public spawnState state = spawnState.COUNTING;
 
+    public static bool levelCompleted = false;
+
+    private void Awake()
+    {
+        levelCompleted = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,19 +52,20 @@ public class WaveManager : MonoBehaviour
 
         if (state == spawnState.WAITING)
         {
-            if (!enemyIsAlive())
-            {
-                waveCompleted();
-            }
-            else
-            {
-                return;
-            }
-        }
+            //if (!enemyIsAlive())
+            //{
+            //    waveCompleted();
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
+            waveCompleted();
+        }
         if (waveCountDown <= 0)
         {
-            if (state != spawnState.SPAWNING)
+            if (state != spawnState.SPAWNING && state != spawnState.WAVESPAWNED)
             {
                 StartCoroutine(SpawnWave(waves[nextWave]));
             }
@@ -65,6 +73,11 @@ public class WaveManager : MonoBehaviour
         else
         {
             waveCountDown -= Time.deltaTime;
+        }
+
+        if (state == spawnState.WAVESPAWNED && !enemyIsAlive())
+        {
+            levelCompleted = true;
         }
     }
 
@@ -75,15 +88,19 @@ public class WaveManager : MonoBehaviour
         state = spawnState.COUNTING;
         waveCountDown = timeBetweenWaves;
 
-        if (nextWave + 1 > waves.Length - 1)
+        if (nextWave + 1 >= waves.Length - 1 && !enemyIsAlive())
         {
-            nextWave = 0;
             Debug.Log("You won");
             return;
-        }
-        else
+        } else if (nextWave + 1 <= waves.Length - 1)
         {
             nextWave++;
+        } else
+        {
+            Debug.Log("what");
+
+            state = spawnState.WAVESPAWNED;
+            return;
         }
 
     }

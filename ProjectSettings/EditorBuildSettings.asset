@@ -5,7 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 61dfc3aa0f592894cbf094848fe35c0b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: fc3129ef60058c842bfb47c1d3a320a7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: 31708c3d10c9fc24fb5c95efbb680b2f
+  - enabled: 1
+    path: Assets/Scenes/AmongUsBoss.unity
+    guid: ba26b3b22dec9404490a63f73a25bde9
+  - enabled: 1
+    path: Assets/Scenes/SceneAmongUsBoss.unity
+    guid: 0bb94b8654f71cf41b7e8ce43028d512
   m_configObjects: {}

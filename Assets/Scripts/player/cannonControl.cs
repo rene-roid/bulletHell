@@ -11,6 +11,7 @@ public class cannonControl : MonoBehaviour
 
     public GameObject fireEffect;
     public LineRenderer lineRenderer;
+    public GameObject laserAnimation;
 
     // Ammo values
     public int amo1;
@@ -157,12 +158,14 @@ public class cannonControl : MonoBehaviour
             {
                 lineRenderer.SetPosition(0, this.transform.position);
                 lineRenderer.SetPosition(1, hitinfo.point);
+                laserAnimation.transform.position = new Vector2(laserAnimation.transform.position.x, hitinfo.point.y);
             }
         }
         else
         {
             lineRenderer.SetPosition(0, this.transform.position);
             lineRenderer.SetPosition(1, transform.position + transform.up * 100);
+            laserAnimation.transform.position = new Vector2(laserAnimation.transform.position.x, laserAnimation.transform.position.x * 10);
         }
 
         lineRenderer.enabled = true;
