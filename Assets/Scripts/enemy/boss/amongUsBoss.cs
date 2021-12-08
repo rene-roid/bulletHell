@@ -51,30 +51,30 @@ public class amongUsBoss : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            StartCoroutine(KnifeAttack());
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            StartCoroutine(CannonAttack());
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            StartCoroutine(KnifeCircle());
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            StartCoroutine(KnifeInvocation());
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(CannonWave());
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(KnifeThrow());
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    StartCoroutine(KnifeAttack());
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    StartCoroutine(CannonAttack());
+        //}
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    StartCoroutine(KnifeCircle());
+        //}
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    StartCoroutine(KnifeInvocation());
+        //}
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    StartCoroutine(CannonWave());
+        //}
+        //if (Input.GetKeyDown(KeyCode.N))
+        //{
+        //    StartCoroutine(KnifeThrow());
+        //}
 
         Attacks();
 

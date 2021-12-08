@@ -23,6 +23,8 @@ public class playerBurst : MonoBehaviour
     private LensDistortion _LensDistortion;
     private ChromaticAberration _ChromaticAberration;
 
+    public ParticleSystem explosion;
+
     private void Start()
     {
         plyr1Burst = 0;
@@ -61,6 +63,13 @@ public class playerBurst : MonoBehaviour
         }
 
         TurnOffTimeStop();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            plyr1Burst = 60;
+            plyr2Burst = 60;
+            plyr3Burst = 60;
+        }
     }
 
     private void burstController()
@@ -114,7 +123,6 @@ public class playerBurst : MonoBehaviour
 
         _ChromaticAberration.enabled.Override(true);
         _ChromaticAberration.intensity.Override(1f);
-
     }
 
     private void TurnOffTimeStop()
@@ -136,5 +144,6 @@ public class playerBurst : MonoBehaviour
         {
             Destroy(enemy);
         }
+        explosion.Play();
     }
 }

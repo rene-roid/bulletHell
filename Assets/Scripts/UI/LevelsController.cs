@@ -26,5 +26,10 @@ public class LevelsController : MonoBehaviour
             buttons[n].GetComponent<Button>().interactable = true;
             n++;
         }
+
+        for (int i = n; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponent<Button>().interactable = false;
+        }
     }
 }

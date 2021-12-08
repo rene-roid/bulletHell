@@ -99,4 +99,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene(4);
     }
+
+    public void Level5()
+    {
+        SceneManager.LoadScene(5);
+    }
 }

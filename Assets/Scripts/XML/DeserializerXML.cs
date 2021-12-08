@@ -13,6 +13,12 @@ public class DeserializerXML : MonoBehaviour
         playerValues.levelsUnlocked = player.levels;
     }
 
+    public void UnSave()
+    {
+        DataManager player = XMLop.Deserialize<DataManager>("data.xml");
+        playerValues.levelsUnlocked = 1;
+    }
+
     public class XMLop
     {
         public static T Deserialize<T>(string path)
